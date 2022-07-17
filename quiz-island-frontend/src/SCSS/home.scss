@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Rubik:wght@400;500;700&display=swap');
+@import "config", "login", "quiz", "commuinty", "post", "comment", "header";
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #F5F7FB;
+}
+
+.App {
+  position: relative;
+  background-size: 100% 100%;
+  font-family: 'Lobster', cursive;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: $Purple;
+}
+
+.home {
+  margin: auto 0;
+  height: 80vh;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $Purple;
+
+  &__title {
+
+    h1 {
+      font-size: 5rem;
+      margin: 1rem 0;
+    }
+
+    p {
+      font-size: 2rem;
+      margin: 1rem;
+      max-width: 600px;
+    }
+
+    button {
+      @include loginButton;
+      margin-left: 1rem;
+    }
+  }
+}

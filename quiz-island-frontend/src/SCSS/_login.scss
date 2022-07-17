@@ -1,0 +1,71 @@
+.Login-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Login {
+  margin:5rem 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  background: #FFF;
+  padding: 3.5rem 6rem;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.50);
+
+  &__title {
+    font-weight: 400;
+    margin: 2rem 0;
+    font-size: 1.8rem;
+  }
+
+  &__error {
+    color: red;
+    font-size: 1.3rem;
+    max-width: 400px;
+  }
+
+  &__label {
+    position: relative;
+
+    img {
+      position: absolute;
+      width: 20px;
+      height: 18px;
+      right: 0;
+      bottom: 25px;
+      filter: invert(35%) sepia(15%) saturate(1980%) hue-rotate(192deg) brightness(95%) contrast(86%);
+      opacity: 0.4;
+    }
+  }
+
+  &__input {
+    margin: 0.5rem 0;
+    border: none;
+    border-bottom: 1px solid $Purple;
+    font-size: 1.2rem;
+    width: 420px;
+    height: 50px;
+    letter-spacing: 0.2rem;
+    transition: all 500ms ease-in-out;
+
+    &::placeholder {
+      color: $Purple;
+      opacity: 0.4;
+      font-family: 'Lobster', cursive;
+    }
+
+    &:focus::placeholder {
+      color: transparent;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__button {
+    @include loginButton;
+  }
+}

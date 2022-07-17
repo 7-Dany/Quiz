@@ -1,0 +1,28 @@
+.Comment {
+  @extend .Post;
+  width: 630px;
+  margin: 0;
+
+  &__count {
+    @extend .Post__count;
+  }
+
+  &__person-info {
+    @extend .Post__person-info;
+  }
+
+  .features {
+    @extend .features;
+  }
+
+  &__text {
+    @extend .Post__text;
+
+    p {
+      .replied-person {
+        color: $Purple;
+      }
+    }
+  }
+}
+

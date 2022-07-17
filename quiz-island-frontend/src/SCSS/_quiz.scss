@@ -1,0 +1,121 @@
+.Quiz {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Quiz-start {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  text-align: center;
+
+  &__title {
+    font-size: 5rem;
+  }
+
+  &__description {
+    font-size: 1.5rem;
+    max-width: 300px;
+  }
+
+  &__button {
+    font-family: 'Lobster', cursive;
+    width: 195px;
+    height: 55px;
+    border-radius: 15px;
+    background: $Purple;
+    color: $Grayish-White;
+    transition: 500ms all ease-in-out;
+    cursor: pointer;
+    font-size: 1.5rem;
+    border: none;
+
+    &:hover {
+      border: 2px solid $Purple;
+      color: $Purple;
+      background: transparent;
+    }
+  }
+}
+
+.Quiz-game {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &__footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__check {
+    display: inline;
+    font-family: 'Lobster', cursive;
+    width: 200px;
+    height: 40px;
+    border: none;
+    margin: 1rem;
+    border-radius: 10px;
+    background-color: $Purple;
+    color: $Grayish-White;
+    cursor: pointer;
+    transition: 500ms all ease-in-out;
+    font-size: 1.5rem;
+
+    &:hover {
+      background-color: transparent;
+      border: 2px solid $Purple;
+      color: $Purple;
+    }
+  }
+
+  &__score {
+    font-size: 1.5rem;
+    margin: 0 1.5rem;
+    display: inline;
+  }
+}
+
+.Question {
+  font-family: 'Roboto', sans-serif;
+  border-bottom: 1px solid $Purple;
+  margin: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  &__title {
+    font-size: 1.5rem;
+    margin: 1rem;
+    grid-column: 1/-1;
+  }
+
+  &__answer {
+    max-width: 300px;
+    margin: 1rem;
+    font-size: 1rem;
+    border: 2px solid $Purple;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    color: $Purple;
+    cursor: pointer;
+    transition: 500ms all ease;
+
+    &.active {
+      border: none;
+      background-color: $white-purple;
+    }
+
+    &.correct {
+      background-color: #94D7A2;
+    }
+
+    &.wrong {
+      background-color: #F8BCBC;
+    }
+  }
+
+}
