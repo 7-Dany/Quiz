@@ -15,10 +15,10 @@ function App() {
     const [logOut, setLogOut] = React.useState(false)
     const [checkLoginOrSignUp, setCheckLoginOrSignUp] = React.useState(false)
     const [startNewGame, setStartNewGame] = React.useState(false)
-    const [userData, setUserData] = React.useState({})
     const [errorMessage, setErrorMessage] = React.useState('')
     const [token, setToken] = React.useState('')
     const [currentUser, setCurrentUser] = React.useState({})
+    const [userData, setUserData] = React.useState({})
     const [quizData, setQuizData] = React.useState([])
     const [user, setUser] = React.useState({
         firstName: '',
@@ -29,6 +29,7 @@ function App() {
     })
 
     function handleUserChanges(event) {
+        // input handler , it will save all changes happen to input and save it to user
         setErrorMessage('')
         const {name, value} = event.target
         setUser(oldUser => {
@@ -37,6 +38,7 @@ function App() {
     }
 
     function handleLogOut(event) {
+        // once the user logout it will reset all values for all states
         setToken('')
         setCurrentUser({})
         setLogOut(false)
@@ -52,6 +54,7 @@ function App() {
     }
 
     function handleLogin(event, state) {
+        // if the user change between login and sign up it will reset error message, input fields
         setErrorMessage('')
         setCheckLoginOrSignUp(state)
         setUser({
@@ -65,6 +68,8 @@ function App() {
     }
 
     function onSubmit(event) {
+        // after submitting login or signup form it will save the data collected and send it to the api
+        //if it log in it will send email and password only, if it sign up it will send newUser
         event.preventDefault()
         setErrorMessage('')
         const submitUser = !checkLoginOrSignUp ? {email: user.email, password: user.password} : user
@@ -91,6 +96,7 @@ function App() {
     }
 
     function setLoginUser(data) {
+        // it will take the data from the response and update the current user with the user received
         setToken(data.token)
         setCurrentUser({
                 id: data.id,
@@ -103,6 +109,7 @@ function App() {
     }
 
     React.useEffect(() => {
+        // to get 10 questions from trivia api and update quizData with those questions
         axios.get('https://opentdb.com/api.php?amount=10')
             .then(response => {
                 setQuizData(oldData => response.data.results)
@@ -111,7 +118,9 @@ function App() {
                 console.log(err.response)
             })
     }, [startNewGame])
+
     React.useEffect(() => {
+        // to send the user to the backend, and it will create new one if it sign up, and will authenticate one if it login
         if (signUp === true) {
             axios.post('/api/user', userData)
                 .then(response => {
@@ -139,6 +148,7 @@ function App() {
                 })
         }
     }, [signUp, userData])
+
     return (
         <div className="App">
             <Header

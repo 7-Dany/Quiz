@@ -120,7 +120,7 @@ export const authenticateUser = async (request: Request, response: Response, nex
         return response.json({
             status: 'success',
             data: {
-                id: authenticatedUser.email,
+                id: authenticatedUser.id,
                 first_name: authenticatedUser.first_name,
                 last_name: authenticatedUser.last_name,
                 email: authenticatedUser.email,

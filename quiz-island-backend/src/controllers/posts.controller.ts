@@ -66,8 +66,8 @@ export const updatePost = async (request: Request, response: Response, next: Nex
 export const updatePostScore = async (request: Request, response: Response, next: NextFunction) => {
     try {
         const id = request.params.id
-        const score = request.body.score
-        const post = await postsModel.updateScore(id, score)
+        const state = request.body.state as unknown as Boolean
+        const post = await postsModel.updateScore(id, state)
         response.json({
             status: "Success",
             data: {...post},
@@ -80,7 +80,13 @@ export const updatePostScore = async (request: Request, response: Response, next
 
 export const deletePost = async (request: Request, response: Response, next: NextFunction) => {
     try {
-
+        const id = request.params.id
+        const deletedPost = await postsModel.delete(id)
+        response.json({
+            status: 'Success',
+            data: {...deletedPost},
+            message: "Post Got Deleted Successfully"
+        })
     } catch (error) {
         next(error)
     }

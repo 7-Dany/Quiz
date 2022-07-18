@@ -60,20 +60,26 @@ export class PostsModel {
                          WHERE id = $2
                          RETURNING *`
             const result = await connect.query(sql, [newContent, id])
+            connect.release()
             return result.rows[0]
         } catch (error) {
             throw new Error(`Unable to update Post, ${(error as Error).message}`)
         }
     }
 
-    async updateScore(id: string, score: number): Promise<Post> {
+    async updateScore(id: string, state: Boolean): Promise<Post> {
         try {
             const connect = await database.connect()
+            const postScore = await connect.query(`SELECT score
+                                              FROM posts
+                                              WHERE id = $1`, [id])
+            const score = parseInt(postScore.rows[0].score)
             const sql = `UPDATE posts
                          SET score=$1
                          WHERE id = $2
                          RETURNING *`
-            const result = await connect.query(sql, [score, id])
+            const result = await connect.query(sql, [state ? score + 1 : score - 1, id])
+            connect.release()
             return result.rows[0]
         } catch (error) {
             throw new Error(`Unable to update Post, ${(error as Error).message}`)
@@ -88,6 +94,7 @@ export class PostsModel {
                          WHERE id = $1
                          RETURNING *`
             const result = await connect.query(sql, [id])
+            connect.release()
             return result.rows[0]
         } catch (error) {
             throw new Error(`Unable to delete Post, ${(error as Error).message}`)
