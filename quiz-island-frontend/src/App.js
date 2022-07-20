@@ -4,17 +4,17 @@ import {Route, Routes, useNavigate} from "react-router-dom";
 import Community from "./components/Community";
 import Login from "./components/Login";
 import Quiz from "./components/Quiz";
-import postsData from './commentsData.json'
 import Header from "./components/Header";
 import Home from "./components/Home";
 import NoMatch from "./components/NoMatch";
 
 function App() {
     const navigate = useNavigate()
-    const [signUp, setSignUp] = React.useState(null)
-    const [logOut, setLogOut] = React.useState(false)
     const [checkLoginOrSignUp, setCheckLoginOrSignUp] = React.useState(false)
     const [startNewGame, setStartNewGame] = React.useState(false)
+    const [logOut, setLogOut] = React.useState(false)
+    const [signUp, setSignUp] = React.useState(null)
+    const [addPost, setAddPost] = React.useState('')
     const [errorMessage, setErrorMessage] = React.useState('')
     const [token, setToken] = React.useState('')
     const [currentUser, setCurrentUser] = React.useState({})
@@ -81,7 +81,7 @@ function App() {
                     first_name: user.firstName,
                     last_name: user.lastName,
                     email: user.email,
-                    image: '',
+                    image: './images/avatars/person.svg',
                     password: user.password
                 }
                 setSignUp(true)
@@ -108,16 +108,9 @@ function App() {
         )
     }
 
-    React.useEffect(() => {
-        // to get 10 questions from trivia api and update quizData with those questions
-        axios.get('https://opentdb.com/api.php?amount=10')
-            .then(response => {
-                setQuizData(oldData => response.data.results)
-            })
-            .catch(err => {
-                console.log(err.response)
-            })
-    }, [startNewGame])
+    function newPost(message) {
+        setAddPost(message)
+    }
 
     React.useEffect(() => {
         // to send the user to the backend, and it will create new one if it sign up, and will authenticate one if it login
@@ -149,6 +142,17 @@ function App() {
         }
     }, [signUp, userData])
 
+    React.useEffect(() => {
+        // to get 10 questions from trivia api and update quizData with those questions
+        axios.get('https://opentdb.com/api.php?amount=10')
+            .then(response => {
+                setQuizData(oldData => response.data.results)
+            })
+            .catch(err => {
+                console.log(err.response)
+            })
+    }, [startNewGame])
+
     return (
         <div className="App">
             <Header
@@ -166,7 +170,9 @@ function App() {
                 />}/>
                 <Route path='/community' element={
                     <Community
-                        postsData={postsData}
+                        token={token}
+                        currentUser={currentUser}
+                        newPost={newPost}
                     />}/>
                 <Route path='login' element={
                     <Login

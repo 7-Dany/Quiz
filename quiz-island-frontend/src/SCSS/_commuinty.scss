@@ -1,5 +1,4 @@
 .Post-Header {
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,13 +22,13 @@
   }
 
   &__button {
-    font-family: 'Lobster', cursive;
+    font-family: 'Barlow Condensed', sans-serif;
     margin-left: 1rem;
     background-color: $White;
     border-radius: 25px;
     height: 40px;
     cursor: pointer;
-    padding: 0 6.5rem 0 1.2rem;
+    padding: 0 8.6rem 0 1.2rem;
     color: $Purple;
     transition: 300ms all ease-in-out;
     font-size: 1.2rem;
@@ -45,8 +44,10 @@
 }
 
 .pop-up {
-  position: absolute;
+  position: fixed;
   z-index: 1;
+  top: calc(50% - 208px);
+  left: calc(50% - 230px);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -109,7 +110,7 @@
   }
 
   &__textarea {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Barlow Condensed', sans-serif;
     outline: none;
     border: none;
     font-size: 1rem;
@@ -128,7 +129,7 @@
   }
 
   &__post {
-    font-family: 'Lobster', cursive;
+    font-family: 'Barlow Condensed', sans-serif;
     font-size: 1.2rem;
     margin: 0.8rem;
     width: 92%;

@@ -17,3 +17,15 @@ export const getPost = async (request: Request, response: Response, next: NextFu
         next(error)
     }
 }
+export const getAllPosts = async (request: Request, response: Response, next: NextFunction) => {
+    try {
+        const posts = await dashboardModel.getAllPosts()
+        response.json({
+            status: "Success",
+            data: [...posts],
+            message: "Posts got retrieved successfully"
+        })
+    } catch (error) {
+        next(error)
+    }
+}

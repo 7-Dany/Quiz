@@ -22,7 +22,7 @@
   }
 
   &__button {
-    font-family: 'Lobster', cursive;
+    font-family: 'Barlow Condensed', sans-serif;
     width: 195px;
     height: 55px;
     border-radius: 15px;
@@ -54,7 +54,7 @@
 
   &__check {
     display: inline;
-    font-family: 'Lobster', cursive;
+    font-family: 'Barlow Condensed', sans-serif;
     width: 200px;
     height: 40px;
     border: none;
@@ -81,7 +81,7 @@
 }
 
 .Question {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Barlow Condensed', sans-serif;
   border-bottom: 1px solid $Purple;
   margin: 0.5rem;
   display: grid;

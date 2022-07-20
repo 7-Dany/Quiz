@@ -52,7 +52,8 @@ export class DashboardPostModel {
     async showPostComments(id: string): Promise<DashboardComment[]> {
         try {
             const connect = await database.connect()
-            const sql = `SELECT post_id,
+            const sql = `SELECT post_comments.id,
+                                post_id,
                                 comment_id,
                                 user_id,
                                 u.first_name,
@@ -68,12 +69,36 @@ export class DashboardPostModel {
                                   INNER JOIN comments c on c.id = post_comments.comment_id
                                   INNER JOIN users u on u.id = c.user_id
                                   FULL JOIN users u2 on u2.id = post_comments.replying_to
-                         WHERE post_id = $1`
+                         WHERE post_id = $1
+                         ORDER BY created_at`
             const result = await connect.query(sql, [id])
             connect.release()
             return result.rows
         } catch (error) {
             throw new Error(`Unable to get post information, ${(error as Error).message}`)
+        }
+    }
+
+    async getAllPosts(): Promise<DashboardPost[]> {
+        try {
+            const connect = await database.connect()
+            const sql = `SELECT posts.id,
+                                user_id,
+                                first_name,
+                                last_name,
+                                image,
+                                email,
+                                content,
+                                score,
+                                create_at
+                         FROM posts
+                                  INNER JOIN users u on u.id = posts.user_id
+                         ORDER BY score DESC, create_at DESC`
+            const result = await connect.query(sql)
+            connect.release()
+            return result.rows
+        } catch (error) {
+            throw new Error(`Unable to get posts, ${(error as Error).message}`)
         }
     }
 }
