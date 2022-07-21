@@ -109,7 +109,6 @@ function Community(props) {
         } else if (order === 'delete') {
             axios.delete(`/api/post/${newPostData.postId}`, config)
                 .then(response => {
-                    console.log(response.data)
                     setOrder('')
                     setNewPostData({
                         postText: '',
